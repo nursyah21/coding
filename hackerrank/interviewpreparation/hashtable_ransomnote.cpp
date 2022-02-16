@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 
-
 using namespace std;
 
 void solution(vector<string> magazine, vector<string> note){
