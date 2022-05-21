@@ -1,0 +1,17 @@
+#improvement loop
+def selectionSort(arr):
+  for i in range(10):
+    for j in range(i+1,10):
+      if arr[i] > arr[j]:
+         arr[i],arr[j]=arr[j],arr[i]
+
+
+#using cache
+from functools import lru_cache
+
+@lru_cache
+def fib(n):
+  if n < 2: return 1
+  return fib(n-2) + fib(n-1)
+
+

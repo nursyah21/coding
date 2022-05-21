@@ -1,0 +1,35 @@
+#!/bin/bash
+
+[ $1 ] && fmt=`echo "$1"|sed 's/\./\n/g'|tail -1` || printf "Compiler cpp and c\nUsage:\n  runc <file>.c     #compile and run C source-code\n  runc <file>.cpp   #compile and run C++ source-code\n"
+
+t0=`date +%s%N`
+e9=1000000000
+Dur(){
+  t1=`date +%s%N`
+  dif=`echo "$t1-$t0"|bc`
+  dur=`echo "scale=3;$dif/$e9"|bc`
+  
+  [ $dif -lt $e9 ] && dur=`echo $dur|sed -e 's/^/0/'`
+
+  echo compile: $dur|sed 's/$/s/'
+}
+
+opt="-Wall -lm"
+if [ "$fmt" == "c" ]
+then
+  gcc $opt "$1" && Dur && \
+  termux-elf-cleaner a.out 1>/dev/null &&\
+  cp a.out ~/a.out && time ~/a.out
+
+
+  exit
+fi
+
+if [ "$fmt" == "cpp" ]
+then
+  g++ $opt "$1" && Dur &&\
+  termux-elf-cleaner a.out 1>/dev/null &&\
+  cp a.out ~/a.out && time ~/a.out
+
+  exit
+fi
