@@ -1,4 +1,4 @@
-# coding interview preparation
+# coding
 
 hackerrank: <https://www.hackerrank.com/interview/interview-preparation-kit>
 
